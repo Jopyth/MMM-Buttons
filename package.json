@@ -1,0 +1,25 @@
+{
+  "name": "Magic-Mirror-Module-Buttons",
+  "version": "0.1.0",
+  "description": "A module for connecting multiple buttons.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jopyth/MMM-Buttons"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "buttons",
+    "module"
+  ],
+  "author": "Joseph Bethge",
+  "contributors": "git+https://github.com/jopyth/MMM-Buttons/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "git+https://github.com/jopyth/MMM-Buttons/issues"
+  },
+  "homepage": "git+https://github.com/jopyth/MMM-Buttons#readme",
+  "dependencies": {
+    "onoff": "latest"
+  }
+}
