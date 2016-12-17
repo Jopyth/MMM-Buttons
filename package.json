@@ -1,6 +1,6 @@
 {
   "name": "Magic-Mirror-Module-Buttons",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A module for connecting multiple buttons.",
   "repository": {
     "type": "git",
@@ -19,7 +19,13 @@
     "url": "git+https://github.com/jopyth/MMM-Buttons/issues"
   },
   "homepage": "git+https://github.com/jopyth/MMM-Buttons#readme",
+  "scripts": {
+    "postinstall": "node_modules/.bin/electron-rebuild -e ../../node_modules/electron"
+  },
   "dependencies": {
     "onoff": "latest"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.2.1"
   }
 }

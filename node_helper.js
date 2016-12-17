@@ -27,31 +27,30 @@ module.exports = NodeHelper.create({
         };
     },
 
-    constructPayload: function(name, time) {
-        var self = this;
+    watchHandler: function(index) {
+        return function (err, value) {
+            if (value == 1) {
+                this.buttons[index].pressed = new Date().getTime();
+                this.sendSocketNotification("BUTTON_DOWN", {
+                    index: index
+                });
+                setTimeout(this.watchHandler, this.config.minLongPressTime, undefined, 0);
+                return;
+            }
+            if (value == 0 && this.buttons[index].pressed !== undefined) {
+                var start = this.buttons[index].pressed;
+                var end = new Date().getTime(); 
+                var time = end - start;
 
-        var payload = {};
+                this.buttons[index].pressed = undefined;
 
-        if (self.config.minShortPressTime <= time && time <= self.config.maxShortPressTime)
-        {
-            // short button press
-            payload.name = name;
-            payload.time = time;
-            payload.longPress = false;
+                this.sendSocketNotification("BUTTON_UP", {
+                    index: index,
+                    duration: time
+                });
+                return;
+            }
         }
-
-        var min = self.config.minLongPressTime;
-        var max = self.config.maxLongPressTime;
-
-        if (self.config.registerLongPress && min <= time && time <= max)
-        {
-            // long button press
-            payload.name = name;
-            payload.time = time;
-            payload.longPress = true;
-        }
-
-        return payload;
     },
 
     intializeButton: function(index) {
@@ -60,26 +59,7 @@ module.exports = NodeHelper.create({
         var options = { persistentWatch: true };
 
         var pir = new Gpio(self.buttons[index].pin, 'in', 'both', options);
-        pir.watch(function(err, value) {
-            if (value == 1) {
-                self.buttons[index].pressed = new Date().getTime();
-                return;
-            }
-            if (value == 0 && self.buttons[index].pressed !== undefined) {
-                var start = self.buttons[index].pressed;
-                var end = new Date().getTime(); 
-                var time = end - start;
-
-                self.buttons[index].pressed = undefined;
-
-                var payload = self.constructPayload(self.buttons[index].name, time);
-
-                if (payload !== {}) {
-                    self.sendSocketNotification("BUTTON_PRESSED", payload);
-                }
-                return;
-            }
-        });
+        pir.watch(this.watchHandler(index));
     },
 
     intializeButtons: function() {
@@ -92,7 +72,7 @@ module.exports = NodeHelper.create({
         self.buttons = self.config.buttons;
 
         for (var i = 0; i < self.buttons.length; i++) {
-            console.log("Initialize " + self.buttons[i].name + " on PIN " + self.buttons[i].pin);
+            console.log("Initialize button " + self.buttons[i].name + " on PIN " + self.buttons[i].pin);
             self.buttons[i].pressed = undefined;
             self.intializeButton(i);
         }
