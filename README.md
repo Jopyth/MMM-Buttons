@@ -9,6 +9,16 @@ For example this can be used to send notifications to the following modules:
 - [Remote Control](https://forum.magicmirror.builders/topic/735/remote-control-shutdown-configure-and-update-your-magicmirror)
 - [Profile Switcher](https://forum.magicmirror.builders/topic/1402/mmm-profileswitcher-a-profile-user-layout-switching-module)
 
+## Installation
+
+Clone this repository in your `modules` folder, and install dependencies:
+```bash
+cd ~/MagicMirror/modules # adapt directory if you are using a different one
+git clone https://github.com/Jopyth/MMM-Buttons.git
+cd MMM-Buttons
+npm install # this can take a while
+```
+
 ## Configuration
 
 Add the module to your modules array in your `config.js`.
