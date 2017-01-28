@@ -2,6 +2,7 @@
 
 This a module for [Magic Mirror²](https://github.com/MichMich/MagicMirror) to act based on button presses via GPIO.
 It is capable of connecting multiple buttons at once, which can be individually configured.
+It is basically a generalized version of the [Button module](https://github.com/PtrBld/MMM-Button), original idea comes from @PtrBld.
 However it only sends out notifications to other modules.
 
 For example this can be used to send notifications to the following modules:
