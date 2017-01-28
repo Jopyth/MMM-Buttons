@@ -13,47 +13,10 @@ Module.register("MMM-Buttons", {
 
     // Default module config.
     defaults: {
-        buttons: [
-            {
-                pin: 25,
-                name: "ENTER",
-                longPress: {
-                    notification: "REMOTE_ACTION",
-                    payload: {action: "MONITOROFF"}
-                },
-                shortPress: {
-                    notification: "REMOTE_ACTION",
-                    payload: {action: "MONITORON"}
-                }
-            },
-            {
-                pin: 24,
-                name: "POWER",
-                longPress: {
-                    title: "Herunterfahren",
-                    message: "Taste 5 Sekunden gedrückt halten, um herunter zu fahren",
-                    imageFA: "power-off",
-                    notification: "REMOTE_ACTION",
-                    payload: {action: "SHUTDOWN"}
-                },
-                shortPress: undefined
-            },
-            {
-                pin: 23,
-                name: "DOWN",
-                longPress: undefined,
-                shortPress: undefined
-            },
-            {
-                pin: 22,
-                name: "UP",
-                longPress: undefined,
-                shortPress: undefined
-            }
-        ],
+        buttons: [],
         minShortPressTime: 0,
         maxShortPressTime: 500,
-        minLongPressTime: 5000
+        minLongPressTime: 3000
     },
 
     // Define start sequence.
