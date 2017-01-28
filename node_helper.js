@@ -28,23 +28,25 @@ module.exports = NodeHelper.create({
     },
 
     watchHandler: function(index) {
+        var self = this;
+
         return function (err, value) {
             if (value == 1) {
-                this.buttons[index].pressed = new Date().getTime();
-                this.sendSocketNotification("BUTTON_DOWN", {
+                self.buttons[index].pressed = new Date().getTime();
+                self.sendSocketNotification("BUTTON_DOWN", {
                     index: index
                 });
-                setTimeout(this.watchHandler, this.config.minLongPressTime, undefined, 0);
+                setTimeout(self.watchHandler(index), self.config.minLongPressTime, undefined, 0);
                 return;
             }
-            if (value == 0 && this.buttons[index].pressed !== undefined) {
-                var start = this.buttons[index].pressed;
+            if (value == 0 && self.buttons[index].pressed !== undefined) {
+                var start = self.buttons[index].pressed;
                 var end = new Date().getTime(); 
                 var time = end - start;
 
-                this.buttons[index].pressed = undefined;
+                self.buttons[index].pressed = undefined;
 
-                this.sendSocketNotification("BUTTON_UP", {
+                self.sendSocketNotification("BUTTON_UP", {
                     index: index,
                     duration: time
                 });

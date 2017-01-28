@@ -88,8 +88,6 @@ Module.register("MMM-Buttons", {
     },
 
     buttonUp: function(index, duration) {
-        var self = this;
-
         if (this.alerts[index]) {
             // alert already shown, clear interval to update it and hide it
             if (this.intervals[index] !== undefined) {
@@ -110,15 +108,15 @@ Module.register("MMM-Buttons", {
         var shortPress = this.config.buttons[index].shortPress
         var longPress = this.config.buttons[index].longPress
 
-        if (shortPress && min <= time && time <= max)
+        if (shortPress && min <= duration && duration <= max)
         {
-            sendAction(shortPress);
+            this.sendAction(shortPress);
         }
 
-        min = self.config.minLongPressTime;
-        if (longPress && min <= time)
+        min = this.config.minLongPressTime;
+        if (longPress && min <= duration)
         {
-            sendAction(longPress);
+            this.sendAction(longPress);
         }
     },
 
@@ -129,9 +127,7 @@ Module.register("MMM-Buttons", {
     buttonDown: function(index) {
         var self = this;
 
-        this.pressStart[index] = new Date().getTime();
-
-        if (self.config.buttons[index].longPress.title)
+        if (self.config.buttons[index].longPress && self.config.buttons[index].longPress.title)
         {
             this.intervals[index] = setTimeout(function () {
                 self.startAlert(index);
@@ -139,19 +135,18 @@ Module.register("MMM-Buttons", {
         }
     },
 
-    updateAlert: function (index) {
+    showAlert: function (index) {
         // display the message
         this.sendNotification("SHOW_ALERT", {
-            title: self.config.buttons[index].longPress.title,
-            message: self.config.buttons[index].longPress.message,
-            imageFA: self.config.buttons[index].longPress.imageFA
+            title: this.config.buttons[index].longPress.title,
+            message: this.config.buttons[index].longPress.message,
+            imageFA: this.config.buttons[index].longPress.imageFA
         });
     },
 
     startAlert: function(index) {
         this.alerts[index] = true;
-        this.updateAlert(index);
-        this.intervals[index] = setInterval(this.updateAlert, 1000, index);
+        this.showAlert(index);
     },
 
     // Override socket notification handler.
