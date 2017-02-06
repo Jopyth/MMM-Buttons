@@ -83,7 +83,7 @@ Module.register("MMM-Buttons", {
         }
     },
 
-    sendAction(description) {
+    sendAction: function(description) {
         this.sendNotification(description.notification, description.payload);
     },
 
