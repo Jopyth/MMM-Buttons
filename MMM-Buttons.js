@@ -16,7 +16,8 @@ Module.register("MMM-Buttons", {
         buttons: [],
         minShortPressTime: 0,
         maxShortPressTime: 500,
-        minLongPressTime: 3000
+        minLongPressTime: 3000,
+        bounceTimeout: 300
     },
 
     // Define start sequence.

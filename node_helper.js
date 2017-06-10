@@ -32,20 +32,31 @@ module.exports = NodeHelper.create({
 
         return function (err, value) {
             if (value == 1) {
-                self.buttons[index].pressed = new Date().getTime();
+                var start = new Date().getTime();
+                if (self.buttons[index].downBounceTimeoutEnd > start) {
+                    // We're bouncing!
+                    return;
+                }
+
+                self.buttons[index].pressed = start;
+                self.buttons[index].downBounceTimeoutEnd = start + self.config.bounceTimeout;
                 self.sendSocketNotification("BUTTON_DOWN", {
                     index: index
                 });
-                setTimeout(self.watchHandler(index), self.config.minLongPressTime, undefined, 0);
                 return;
             }
             if (value == 0 && self.buttons[index].pressed !== undefined) {
                 var start = self.buttons[index].pressed;
-                var end = new Date().getTime(); 
-                var time = end - start;
+                var end = new Date().getTime();
+                if (self.buttons[index].upBounceTimeoutEnd > end) {
+                    // We're bouncing!
+                    return;
+                }
 
                 self.buttons[index].pressed = undefined;
+                self.buttons[index].upBounceTimeoutEnd = end + self.config.bounceTimeout;
 
+                var time = end - start;
                 self.sendSocketNotification("BUTTON_UP", {
                     index: index,
                     duration: time
