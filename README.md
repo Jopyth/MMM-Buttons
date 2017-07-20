@@ -70,6 +70,7 @@ Here is full documentation of options for the modules configuration:
 | `minShortPressTime` | Minimum duration to trigger a short press in `ms`. Default is `0`. |
 | `maxShortPressTime` | Maximum duration to trigger a short press in `ms`. Default is `500`. |
 | `minLongPressTime` | Minimum time needed to trigger a long press in `ms`. Default is `3000`. Any press duration between `maxShortPressTime` and `minLongPressTime` does not do anything. |
+| `bounceTimeout` | Duration to ignore bouncing (unintentional doubble press on the button). |
 
 ### Button Configuration
 
