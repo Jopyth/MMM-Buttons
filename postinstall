@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -f ../../node_modules/.bin/electron-rebuild ]; then
+	cd ../..
+	npm install electron-rebuild >/dev/null 2>&1
+	cd -
+fi 
+../../node_modules/.bin/electron-rebuild 

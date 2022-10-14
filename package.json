@@ -20,12 +20,9 @@
   },
   "homepage": "git+https://github.com/jopyth/MMM-Buttons#readme",
   "scripts": {
-    "postinstall": "node_modules/.bin/electron-rebuild -e ../../node_modules/electron"
+    "postinstall": "./postinstall"
   },
   "dependencies": {
     "onoff": "latest"
-  },
-  "devDependencies": {
-    "electron-rebuild": "^1.2.1"
   }
 }
