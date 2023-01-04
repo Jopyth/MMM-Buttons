@@ -15,7 +15,7 @@ For example this can be used to send notifications to the following modules:
 Clone this repository in your `modules` folder, and install dependencies:
 ```bash
 cd ~/MagicMirror/modules # adapt directory if you are using a different one
-git clone https://github.com/Jopyth/MMM-Buttons.git
+git clone https://github.com/MarcLandis/MMM-Buttons.git
 cd MMM-Buttons
 npm install # this can take a while
 ```
