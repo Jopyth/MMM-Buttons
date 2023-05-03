@@ -20,12 +20,14 @@
   },
   "homepage": "git+https://github.com/jopyth/MMM-Buttons#readme",
   "scripts": {
-    "postinstall": "node_modules/.bin/electron-rebuild -e ../../node_modules/electron"
+    "postinstall": "node_modules/.bin/MagicMirror-rebuild --force-abi=99 -e ../../node_modules/electron"
   },
   "dependencies": {
-    "onoff": "latest"
+    "magicmirror-rebuild": "^1.0.7",
+    "nan": "^2.17.0",
+    "onoff": "^6.0.3"
   },
-  "devDependencies": {
-    "electron-rebuild": "^1.2.1"
+  "resolutions": {
+    "nan": "github:jkleinsc/nan#remove_accessor_signature"
   }
 }
