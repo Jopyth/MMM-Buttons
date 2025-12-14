@@ -1,3 +1,7 @@
+# Archived
+
+This repository is no longer being actively developed. The most up-to-date Fork can be found [here](https://github.com/KristjanESPERANTO/MMM-Buttons), based on my research in December 2025.
+
 # Magic Mirror Module: Buttons
 
 This a module for [Magic Mirror²](https://github.com/MichMich/MagicMirror) to act based on button presses via GPIO.
