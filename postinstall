@@ -1,0 +1,17 @@
+#!/bin/bash
+
+base=~/MagicMirror
+logfile=/dev/null
+if [ ! -e $base/node_modules/@electron/rebuild ];  then 
+    cd $base
+    if [ -e $base/node_modules/.bin/electron-rebuild ]; then 
+	# remove the old version	  
+      npm uninstall electron-rebuild >>$logfile 2>&1
+    fi	  
+    # install the new version 
+    npm install @electron/rebuild >>$logfile 2>&1
+    cd - >/dev/null
+fi
+
+
+$base/node_modules/.bin/electron-rebuild 
